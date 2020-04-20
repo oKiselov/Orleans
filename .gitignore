@@ -1,0 +1,12 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
+/2. Basics/HelloOrleans/.vs/HelloOrleans/v16
+/2. Basics/HelloOrleans/Grains/obj
+/2. Basics/HelloOrleans/Grains/bin/Debug/netstandard2.0
+/2. Basics/HelloOrleans/Interfaces/obj
+/2. Basics/HelloOrleans/Interfaces/bin/Debug/netstandard2.0
+/2. Basics/HelloOrleans/Silo.Host/obj
+/2. Basics/HelloOrleans/Silo.Host/bin/Debug/netcoreapp3.1

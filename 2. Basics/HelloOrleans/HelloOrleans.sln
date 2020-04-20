@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29709.97
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Silo.Host", "Silo.Host\Silo.Host.csproj", "{EBE54946-8DC5-4841-B5B3-01D20618C091}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Grains", "Grains\Grains.csproj", "{5F32788C-8B07-4BBB-BD62-905FFD700AB6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interfaces", "Interfaces\Interfaces.csproj", "{8B4E3D96-8F0D-4634-B6B9-B4673B9071EB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EBE54946-8DC5-4841-B5B3-01D20618C091}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EBE54946-8DC5-4841-B5B3-01D20618C091}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EBE54946-8DC5-4841-B5B3-01D20618C091}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EBE54946-8DC5-4841-B5B3-01D20618C091}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F32788C-8B07-4BBB-BD62-905FFD700AB6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F32788C-8B07-4BBB-BD62-905FFD700AB6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F32788C-8B07-4BBB-BD62-905FFD700AB6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F32788C-8B07-4BBB-BD62-905FFD700AB6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B4E3D96-8F0D-4634-B6B9-B4673B9071EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B4E3D96-8F0D-4634-B6B9-B4673B9071EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B4E3D96-8F0D-4634-B6B9-B4673B9071EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B4E3D96-8F0D-4634-B6B9-B4673B9071EB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {ACD92F40-24A2-49CF-919B-5245771DBD5F}
+	EndGlobalSection
+EndGlobal
