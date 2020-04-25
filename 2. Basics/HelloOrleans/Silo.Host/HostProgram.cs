@@ -1,15 +1,17 @@
 ﻿using System;
 using System.Net;
+using System.Threading;
 using System.Threading.Tasks;
 using Orleans.Configuration;
 using Orleans.Hosting;
 
 namespace Silo.Host
 {
-    public class Program
+    public class HostProgram
     {
         public static async Task<int> Main(string[] args)
         {
+            Thread.Sleep(3000);
             return await RunSilo();
         }
 
