@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Interfaces;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Orleans;
 using Orleans.Configuration;
@@ -23,8 +24,12 @@ namespace Client
             {
                 using (var client = StartClient())
                 {
-                    var grain = client.GetGrain<IHello>(0, "key");
+                    var grain = client.GetGrain<IHello>(0, "key0");
+                    var grain1 = client.GetGrain<IHello>(1, "key1");
+
                     var response = await grain.SayHello("Good Morning");
+                    var response1 = await grain1.SayHello("Good afternoon");
+                    var response2 = await grain1.SayHello("Good evening");
 
                     Console.WriteLine(response);
 
@@ -45,7 +50,11 @@ namespace Client
             return Policy<IClusterClient>
                 .Handle<SiloUnavailableException>()
                 .Or<OrleansMessageRejectionException>()
-                .Or<ConnectionFailedException>()
+                .Or<ConnectionFailedException>(exception =>
+                {
+                    Console.WriteLine(exception.Source + exception.Message);
+                    return true;
+                })
                 .WaitAndRetry(new[] { TimeSpan.FromSeconds(5)})
                 .Execute(() =>
                     {

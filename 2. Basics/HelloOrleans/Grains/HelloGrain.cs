@@ -1,12 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Interfaces;
 using Orleans;
+using Orleans.Providers;
 using Orleans.Runtime;
 
 namespace Grains
 {
-    public class HelloGrain: Grain, IHello
+    [StorageProvider]
+    public class HelloGrain: Grain<GreetingArchive>, IHello
     {
         public override Task OnActivateAsync()
         {
@@ -46,15 +49,24 @@ namespace Grains
             });
         }
 
-        public Task<string> SayHello(string greeting)
+        public async Task<string> SayHello(string greeting)
         {
+            State.Greetings.Add(greeting);
+
+            await WriteStateAsync();
+
             var primaryKey = this.GetPrimaryKeyLong(out string keyExtension);
 
             this.DeactivateOnIdle();
 
             Console.WriteLine($"This is primary key: {primaryKey}: | keyExtension:{keyExtension}");
 
-            return Task.FromResult($"You said: {greeting}, I said 'Hello' !");
+            return $"You said: {greeting}, I said 'Hello' !";
         }
+    }
+
+    public class GreetingArchive
+    {
+        public List<string> Greetings { get; private set; } = new List<string>();
     }
 }
