@@ -1,13 +1,19 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using Grains;
+using Interfaces;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using Orleans;
 using Orleans.Configuration;
 using Orleans.Hosting;
+using Silo.Host.Filters;
 
 namespace Silo.Host
 {
@@ -57,6 +63,19 @@ namespace Silo.Host
                 // Clustering provider 
                 .UseLocalhostClustering()
                 .UseDashboard()
+                .ConfigureServices(services =>
+                {
+                    services.AddSingleton(s => CreateGrainMethodsList());
+                    services.AddSingleton(s => new JsonSerializerSettings
+                    {
+                        NullValueHandling = NullValueHandling.Ignore,
+                        Formatting = Formatting.None,
+                        TypeNameHandling = TypeNameHandling.None,
+                        ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
+                        PreserveReferencesHandling = PreserveReferencesHandling.Objects
+                    });
+                })
+                .AddIncomingGrainCallFilter<LoggingFilter>()
                 // Endpoints
                 .Configure<EndpointOptions>(options =>
                 {
@@ -77,11 +96,24 @@ namespace Silo.Host
                 .ConfigureLogging(logging =>
                     logging
                         .AddFilter("Microsoft", LogLevel.Warning)
-                        .AddFilter("System", LogLevel.Warning));
+                        .AddFilter("System", LogLevel.Warning)
+                        .AddConsole());
 
             var host = builder.Build();
             await host.StartAsync();
             return host;
+        }
+
+        private static GrainInfo CreateGrainMethodsList()
+        {
+            var grainInterfaces = typeof(IHello).Assembly.GetTypes()
+                .Where(type => type.IsInterface)
+                .SelectMany(type => type.GetMethods().Select(methodInfo => methodInfo.Name))
+                .Distinct();
+            return new GrainInfo
+            {
+                Methods = grainInterfaces.ToList()
+            };
         }
 
         private static IConfigurationRoot LoadConfig()
@@ -105,5 +137,14 @@ namespace Silo.Host
     {
         public string Invariant { get; set; }
         public string ConnectionString { get; set; }
+    }
+
+    public class GrainInfo
+    {
+        public GrainInfo()
+        {
+            Methods = new List<string>();
+        }
+        public List<string> Methods { get; set; }
     }
 }
