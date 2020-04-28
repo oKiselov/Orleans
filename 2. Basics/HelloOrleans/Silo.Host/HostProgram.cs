@@ -13,6 +13,7 @@ using Newtonsoft.Json;
 using Orleans;
 using Orleans.Configuration;
 using Orleans.Hosting;
+using Silo.Host.Context;
 using Silo.Host.Filters;
 
 namespace Silo.Host
@@ -74,6 +75,7 @@ namespace Silo.Host
                         ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
                         PreserveReferencesHandling = PreserveReferencesHandling.Objects
                     });
+                    services.AddSingleton<IOrleansRequestContext, OrleansRequestContext>();
                 })
                 .AddIncomingGrainCallFilter<LoggingFilter>()
                 // Endpoints

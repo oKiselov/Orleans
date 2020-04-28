@@ -24,10 +24,13 @@ namespace Client
             {
                 using (var client = StartClient())
                 {
-                    var grain = client.GetGrain<IHello>(0, "key0");
-                    var grain1 = client.GetGrain<IHello>(1, "key1");
+                    RequestContext.Set("traceId", Guid.NewGuid());
 
+                    var grain = client.GetGrain<IHello>(0, "key0");
                     var response = await grain.SayHello("Good Morning");
+
+                    RequestContext.Set("traceId", Guid.NewGuid());
+                    var grain1 = client.GetGrain<IHello>(1, "key1");
                     var response1 = await grain1.SayHello("Good afternoon");
                     var response2 = await grain1.SayHello("Good evening");
 
