@@ -77,6 +77,7 @@ namespace Silo.Host
                     });
                     services.AddSingleton<IOrleansRequestContext, OrleansRequestContext>();
                 })
+                .AddStateStorageBasedLogConsistencyProvider()
                 .AddIncomingGrainCallFilter<LoggingFilter>()
                 // Endpoints
                 .Configure<EndpointOptions>(options =>
