@@ -12,3 +12,12 @@
 /2. Basics/HelloOrleans/Silo.Host/bin/Debug/netcoreapp3.1
 2. Basics/HelloOrleans/Client/bin
 2. Basics/HelloOrleans/Client/obj
+/10. StockTickerApp/StockTickerApp/.vs/StockTickerApp/v16/Server/sqlite3
+/10. StockTickerApp/StockTickerApp/Grains/bin/Debug/netstandard2.0
+/10. StockTickerApp/StockTickerApp/Grains/obj
+/10. StockTickerApp/StockTickerApp/Interfaces/bin/Debug/netstandard2.0
+/10. StockTickerApp/StockTickerApp/Interfaces/obj
+/10. StockTickerApp/StockTickerApp/SiloHost/bin/Debug/netcoreapp3.1
+/10. StockTickerApp/StockTickerApp/SiloHost/obj
+/10. StockTickerApp/StockTickerApp/StocksStreamSubscriptionClient/bin/Debug/netcoreapp3.1
+/10. StockTickerApp/StockTickerApp/StocksStreamSubscriptionClient/obj
